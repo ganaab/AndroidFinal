@@ -1,17 +1,43 @@
 package edu.washington.uw.limelight;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.andrewgiang.textspritzer.lib.SpritzerTextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final SpritzerTextView spritzerTV = (SpritzerTextView) findViewById(R.id.spritzTV);
+        spritzerTV.setSpritzText("Ganaa Like Penis Flavored Ice Cream!!");
+
+        final ImageView play = (ImageView) findViewById(R.id.play);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView play = (ImageView) findViewById(R.id.play);
+                if(play.getTag() == null || play.getTag().equals("start")) {
+                    spritzerTV.play();
+                    play.setImageResource(R.drawable.pausebutton);
+                    play.setTag("stop");
+                } else {
+                    spritzerTV.pause();
+                    play.setImageResource(R.drawable.playbutton);
+                    play.setTag("start");
+                }
+            }
+        });
+
     }
 
 
